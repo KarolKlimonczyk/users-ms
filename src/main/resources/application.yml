@@ -1,0 +1,24 @@
+server:
+  port: ${port:0}
+
+gateway:
+  ip: 127.0.0.1
+
+spring:
+  application:
+    name: users-ms
+  devtools:
+    restart:
+      enabled: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8010/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

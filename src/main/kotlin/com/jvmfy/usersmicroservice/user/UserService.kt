@@ -13,6 +13,8 @@ class UserService(val userRepository: UserRepository, val bCryptPasswordEncoder:
         return UserDetails(user.id.toString(), user.firstName, user.lastName, user.email)
     }
 
+    fun findUserByEmail(email: String) = this.userRepository.findUserByEmail(email)
+
     override fun loadUserByUsername(email: String): org.springframework.security.core.userdetails.UserDetails {
         val user: User = this.userRepository.findUserByEmail(email)
                 ?: throw UsernameNotFoundException("User with $email not found")

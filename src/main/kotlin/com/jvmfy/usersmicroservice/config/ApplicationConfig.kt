@@ -3,6 +3,7 @@ package com.jvmfy.usersmicroservice.config
 import com.jvmfy.usersmicroservice.user.UserService
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.Environment
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -11,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @Configuration
 @EnableWebSecurity
-class ApplicationConfig(@Value("\${gateway.ip}") val gatewayIP: String, val userService: UserService, val passwordEncoder: BCryptPasswordEncoder) : WebSecurityConfigurerAdapter() {
+class ApplicationConfig(@Value("\${gateway.ip}") val gatewayIP: String, val userService: UserService, val passwordEncoder: BCryptPasswordEncoder, val env: Environment) : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
@@ -21,10 +22,10 @@ class ApplicationConfig(@Value("\${gateway.ip}") val gatewayIP: String, val user
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService(userService).passwordEncoder(this.passwordEncoder)
+        auth.userDetailsService(this.userService).passwordEncoder(this.passwordEncoder)
     }
 
-    private fun getAuthenticationFilter() = AuthenticationFilter().also {
+    private fun getAuthenticationFilter() = AuthenticationFilter(this.userService, this.env).also {
         it.setAuthenticationManager(authenticationManager())
     }
 }

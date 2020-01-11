@@ -1,3 +1,8 @@
+app:
+  jwt:
+    expiration-time: 864000000
+    secret: ZWxvZWxvMTEyM2Fzc2Rm
+
 server:
   port: ${port:0}
 

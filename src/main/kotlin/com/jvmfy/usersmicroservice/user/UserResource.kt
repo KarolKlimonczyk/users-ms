@@ -10,7 +10,7 @@ import javax.validation.Valid
 class UserResource(val userService: UserService, val environment: Environment) {
 
     @GetMapping("/status")
-    fun status(): ResponseEntity<String>? = environment.getProperty("local.server.port")?.let { ResponseEntity.ok(it) }
+    fun status(): ResponseEntity<String>? = ResponseEntity.ok("Port: ${environment.getProperty("local.server.port")}. Jwt secret: ${environment.getProperty("app.jwt.secret")}")
 
     @PostMapping("/create")
     fun createUser(@Valid @RequestBody userDto: UserDto): ResponseEntity<UserDetails> = ResponseEntity.ok(this.userService.createNewUser(userDto))

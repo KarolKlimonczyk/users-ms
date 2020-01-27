@@ -34,3 +34,7 @@ management:
     web:
       exposure:
         include: mappings
+
+logging:
+  level:
+    com.jvmfy.usersmicroservice.album.AlbumsServiceClient: DEBUG

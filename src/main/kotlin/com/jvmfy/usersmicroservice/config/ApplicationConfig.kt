@@ -1,5 +1,6 @@
 package com.jvmfy.usersmicroservice.config
 
+import feign.Logger
 import org.springframework.cloud.client.loadbalancer.LoadBalanced
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,4 +16,7 @@ class ApplicationConfig {
     @Bean
     @LoadBalanced
     fun restTemplate(): RestTemplate = RestTemplate()
+
+    @Bean
+    fun feignClientLogger(): Logger.Level = Logger.Level.FULL
 }

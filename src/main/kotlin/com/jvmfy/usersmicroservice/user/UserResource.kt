@@ -14,4 +14,13 @@ class UserResource(val userService: UserService, val environment: Environment) {
 
     @PostMapping("/create")
     fun createUser(@Valid @RequestBody userDto: UserDto): ResponseEntity<UserDetails> = ResponseEntity.ok(this.userService.createNewUser(userDto))
+
+    @GetMapping("/{userId}")
+    fun getUser(@PathVariable userId: String): ResponseEntity<UserDetails> {
+        return try {
+            ResponseEntity.ok(this.userService.getUserByUserId(userId))
+        } catch (e: NoSuchElementException) {
+            ResponseEntity.noContent().build();
+        }
+    }
 }

@@ -47,6 +47,8 @@ management:
 logging:
   level:
     com.jvmfy.usersmicroservice.album.AlbumsServiceClient: DEBUG
+  file:
+    name: users-ms.log
 
 feign:
   hystrix:

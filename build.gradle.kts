@@ -39,6 +39,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
+    implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation(group = "io.jsonwebtoken", name = "jjwt", version = "0.9.1")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
